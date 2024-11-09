@@ -1,13 +1,10 @@
 {
   "port": 6666,
   "db": {
-    "url": "http://localhost",
-    "port": 8123,
+    "url": "mongodb://localhost:27017",
+
     "debug": false,
-    "basicAuth": {
-      "username": "default",
-      "password": ""
-    },
+
     "isUseGzip": false,
     "format": "json",
     "config": {
@@ -18,7 +15,7 @@
     }
   },
   "ws": {
-    "port": 8008,
-    "token": "TOKEN HERE"
+    "port": 3001,
+    "token": "TOKENHERE"
   }
 }
