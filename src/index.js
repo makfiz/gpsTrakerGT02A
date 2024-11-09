@@ -74,6 +74,6 @@ let server = net.createServer(function (socket) {
     }
   });
 });
-
-server.listen(10000);
-console.log('Server starting');
+const port = process.env.PORT || 6666;
+server.listen(port);
+console.log(`Server is running on port ${port}`);
