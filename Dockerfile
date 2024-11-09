@@ -1,7 +1,7 @@
-FROM node:12
+FROM node:18.16.1
 
 WORKDIR /home/node/app
 
 RUN npm install
 
-EXPOSE 10000
+EXPOSE 6666
