@@ -12,9 +12,10 @@ let server = net.createServer(function (socket) {
   console.log('client connected');
 
   socket.on('data', data => {
-    if (data[0] != startBit && data[data.length - 1] != stopBit) {
-      console.log('ERROR PROTOCOL, close connection');
+    if (data[0] !== startBit || data[data.length - 1] !== stopBit) {
+      console.log('Received non-protocol data, closing connection');
       socket.end();
+      return;
     }
 
     let command = String.fromCharCode(data[13], data[14], data[15], data[16]);
@@ -60,14 +61,14 @@ let server = net.createServer(function (socket) {
         //   speed,
         //   course
         // );
-        // WS.sendLocation(
-        //   date.getDate(),
-        //   parseInt(date.getTime() / 1000),
-        //   lat,
-        //   lng,
-        //   speed,
-        //   course
-        // );
+        WS.sendLocation(
+          date.getDate(),
+          parseInt(date.getTime() / 1000),
+          lat,
+          lng,
+          speed,
+          course
+        );
         break;
     }
   });
