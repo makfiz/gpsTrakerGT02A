@@ -1,7 +1,7 @@
 const net = require('net');
 const lib = require('./lib');
 // const DB = require('./db');
-const WS = require('./ws');
+// const WS = require('./ws');
 
 // const config = require('../config');
 
@@ -62,14 +62,14 @@ let server = net.createServer(function (socket) {
         //   speed,
         //   course
         // );
-        WS.sendLocation(
-          date.getDate(),
-          parseInt(date.getTime() / 1000),
-          lat,
-          lng,
-          speed,
-          course
-        );
+        // WS.sendLocation(
+        //   date.getDate(),
+        //   parseInt(date.getTime() / 1000),
+        //   lat,
+        //   lng,
+        //   speed,
+        //   course
+        // );
         break;
     }
   });
