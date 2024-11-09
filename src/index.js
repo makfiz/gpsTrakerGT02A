@@ -13,6 +13,7 @@ let server = net.createServer(function (socket) {
 
   socket.on('data', data => {
     if (data[0] !== startBit || data[data.length - 1] !== stopBit) {
+      console.log('data', data);
       console.log('Received non-protocol data, closing connection');
       socket.end();
       return;
