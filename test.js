@@ -20,4 +20,5 @@ client.on('end', function () {
 
 client.on('error', function (err) {
   console.log('Error: ' + err.message);
+  console.log(err);
 });

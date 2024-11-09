@@ -15,7 +15,7 @@ let server = net.createServer(function (socket) {
     if (data[0] !== startBit || data[data.length - 1] !== stopBit) {
       console.log('data', data.toString('hex'));
       console.log('Received non-protocol data, closing connection');
-      socket.end();
+      // socket.end();
       return;
     }
 
