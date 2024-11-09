@@ -2,15 +2,15 @@ const net = require('net');
 const async = require('async');
 const WebSocket = require('ws');
 
-const config = require('../config');
+// const config = require('../config');
 
-const ws = new WebSocket('ws://localhost:' + config.ws.port);
+const ws = new WebSocket('ws://localhost:' + 10000);
 
 let client = null;
 
 async.series([
   function connectServer(step) {
-    client = net.connect({ port: config.port }, function () {
+    client = net.connect({ port: 6666 }, function () {
       console.log('connected to server!');
       step();
     });
@@ -21,34 +21,34 @@ async.series([
       step();
     });
   },
-  function authWS(step) {
-    ws.send(
-      JSON.stringify({
-        type: 'auth',
-        token: config.ws.token,
-      })
-    );
+  // function authWS(step) {
+  //   ws.send(
+  //     JSON.stringify({
+  //       type: 'auth',
+  //       token: config.ws.token,
+  //     })
+  //   );
 
-    step();
-  },
-  function testWaitAuth(step) {
-    ws.on('message', data => {
-      console.log('Wait auth response');
+  //   step();
+  // },
+  // function testWaitAuth(step) {
+  //   ws.on('message', data => {
+  //     console.log('Wait auth response');
 
-      const msg = JSON.parse(data);
+  //     const msg = JSON.parse(data);
 
-      if (msg.type === 'auth') {
-        if (msg.success) {
-          console.log('Authenticated');
-        } else {
-          console.error('unauthenticated');
-        }
+  //     if (msg.type === 'auth') {
+  //       if (msg.success) {
+  //         console.log('Authenticated');
+  //       } else {
+  //         console.error('unauthenticated');
+  //       }
 
-        ws.removeEventListener('message');
-        step();
-      }
-    });
-  },
+  //       ws.removeEventListener('message');
+  //       step();
+  //     }
+  //   });
+  // },
   function sendHandShake(step) {
     client.write(
       new Buffer.from([

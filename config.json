@@ -15,7 +15,6 @@
     }
   },
   "ws": {
-    "port": 3001,
-    "token": "TOKENHERE"
+    "port": 10000
   }
 }
