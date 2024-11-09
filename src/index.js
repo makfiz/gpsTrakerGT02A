@@ -3,7 +3,7 @@ const lib = require('./lib');
 // const DB = require('./db');
 const WS = require('./ws');
 
-const config = require('../config');
+// const config = require('../config');
 
 const startBit = 0x28;
 const stopBit = 0x29;
@@ -73,5 +73,5 @@ let server = net.createServer(function (socket) {
   });
 });
 
-server.listen(config.port);
+server.listen(10000);
 console.log('Server starting');
