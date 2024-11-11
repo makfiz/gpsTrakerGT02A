@@ -5,44 +5,13 @@ let client = null;
 
 async.series([
   function connectServer(step) {
-    client = net.connect({ port: config.port }, function () {
-      console.log('connected to server!');
-      step();
-    });
-  },
-  function connectWS(step) {
-    ws.on('open', function open() {
-      console.log('connected to websocket!');
-      step();
-    });
-  },
-  function authWS(step) {
-    ws.send(
-      JSON.stringify({
-        type: 'auth',
-        token: config.ws.token,
-      })
-    );
-
-    step();
-  },
-  function testWaitAuth(step) {
-    ws.on('message', data => {
-      console.log('Wait auth response');
-
-      const msg = JSON.parse(data);
-
-      if (msg.type === 'auth') {
-        if (msg.success) {
-          console.log('Authenticated');
-        } else {
-          console.error('unauthenticated');
-        }
-
-        ws.removeEventListener('message');
+    client = net.connect(
+      { host: 'gpstrakergt02a.onrender.com', port: 6666 },
+      function () {
+        console.log('connected to server!');
         step();
       }
-    });
+    );
   },
   function sendHandShake(step) {
     client.write(
@@ -177,30 +146,10 @@ async.series([
     step();
   },
   function waitPacketWS(step) {
-    ws.on('message', data => {
-      console.log('Wait location at WS');
-
-      const msg = JSON.parse(data);
-
-      if (msg.type === 'location') {
-        if (
-          data ===
-          '{"type":"location","date":20,"timestamp":1589947384,"lat":55.883496666666666,"lng":37.523376666666664,"speed":"000.0","course":"123.79"}'
-        ) {
-          console.log('packet is correct');
-        } else {
-          console.error('packet not correct');
-        }
-
-        console.log(msg);
-
-        ws.removeEventListener('message');
-        step();
-      }
-    });
+    console.log('Wait location at WS');
+    step();
   },
   function Disconnect() {
     client.end();
-    ws.close();
   },
 ]);
