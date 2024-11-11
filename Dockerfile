@@ -8,6 +8,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 6666
+EXPOSE ${PORT}
 
 CMD ["node", "src/index.js"]
